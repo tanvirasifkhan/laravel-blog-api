@@ -84,4 +84,19 @@ class ArticleController extends Controller {
             }            
         }
     }
+
+    // remove article using id
+    public function remove(Request $request){
+        try{
+            $article=Article::where('id',$request->id)->first();
+            if($article){
+                $article->delete();
+                return Response::json(['success'=>'Article removed successfully !']);
+            }else{
+                return Response::json(['error'=>'Article not found!']);
+            }
+        }catch(\Illuminate\Database\QueryException $exception){
+            return Response::json(['error'=>'Article belongs to comment.So you cann\'t delete this article!']);
+        }        
+    }
 }
