@@ -34,4 +34,5 @@ Route::get('article/{keyword}/search','ArticleController@searchArticle');
 
 /**********************************   Comment Route Starts Here   *******************************************/
 Route::get('comments','CommentController@index');
+Route::post('comment/store','CommentController@store');
 /**********************************   Comment Route Ends Here   *******************************************/
