@@ -27,4 +27,5 @@ Route::get('category/{keyword}/search','CategoryController@searchCategory');
 Route::get('articles','ArticleController@index');
 Route::post('article/store','ArticleController@store');
 Route::get('article/{id}/show','ArticleController@show');
+Route::post('article/{id}/update','ArticleController@update');
 /**********************************   Article Route Ends Here   *******************************************/
