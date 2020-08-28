@@ -19,4 +19,5 @@ Route::get('categories','CategoryController@index');
 Route::post('category/store','CategoryController@store');
 Route::get('category/{id}/show','CategoryController@show');
 Route::post('category/{id}/update','CategoryController@update');
+Route::post('category/{id}/remove','CategoryController@remove');
 /**********************************   Category Route Ends Here   *******************************************/
