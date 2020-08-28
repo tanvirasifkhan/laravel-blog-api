@@ -42,4 +42,26 @@ class CommentController extends Controller {
             return Response::json(['error'=>'Comment not found!']);
         }        
     }
+
+    // update comment into the database
+    public function update(Request $request){
+        $validators=Validator::make($request->all(),[
+            'comment'=>'required',
+            'article'=>'required'
+        ]);
+        if($validators->fails()){
+            return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
+        }else{
+            $comment=Comment::where('id',$request->id)->first();
+            if($comment){
+                $comment->comment=$request->comment;
+                $comment->author_id=$request->author;
+                $comment->article_id=$request->article;
+                $comment->save();
+                return Response::json(['success'=>'Comment updated successfully !']);
+            }else{
+                return Response::json(['error'=>'Comment not found !']);
+            }            
+        }
+    }
 }
