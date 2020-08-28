@@ -28,4 +28,5 @@ Route::get('articles','ArticleController@index');
 Route::post('article/store','ArticleController@store');
 Route::get('article/{id}/show','ArticleController@show');
 Route::post('article/{id}/update','ArticleController@update');
+Route::post('article/{id}/remove','ArticleController@remove');
 /**********************************   Article Route Ends Here   *******************************************/
