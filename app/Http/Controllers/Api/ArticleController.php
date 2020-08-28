@@ -44,4 +44,13 @@ class ArticleController extends Controller {
             return Response::json(['success'=>'Article created successfully !']);
         }
     }
+
+    // show a specific article by id
+    public function show($id){        
+        if(Article::where('id',$id)->first()){
+            return new ArticleResource(Article::findOrFail($id));
+        }else{
+            return Response::json(['error'=>'Article not found!']);
+        }
+    }
 }
