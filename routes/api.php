@@ -20,4 +20,5 @@ Route::post('category/store','CategoryController@store');
 Route::get('category/{id}/show','CategoryController@show');
 Route::post('category/{id}/update','CategoryController@update');
 Route::post('category/{id}/remove','CategoryController@remove');
+Route::get('category/{keyword}/search','CategoryController@searchCategory');
 /**********************************   Category Route Ends Here   *******************************************/
