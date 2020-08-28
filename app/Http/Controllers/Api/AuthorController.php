@@ -36,4 +36,24 @@ class AuthorController extends Controller {
             return Response::json(['success'=>'Registration done successfully !','author'=>$author,'token'=>$author->api_token]);
         }
     }
+
+    // login user
+    public function login(Request $request){
+        $validators=Validator::make($request->all(),[
+            'email'=>'required|email',
+            'password'=>'required'
+        ]);
+        if($validators->fails()){
+            return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
+        }else{
+            if(Auth::attempt(['email'=>$request->email,'password'=>$request->password])){
+                $author=$request->user();
+                $author->api_token=Str::random(80);
+                $author->save();
+                return Response::json(['success'=>'Login was successfully !','author'=>Auth::user(),'token'=>Auth::user()->api_token]);
+            }else{
+                return Response::json(['errors'=>'Login failed ! Wrong credentials.']);
+            }
+        }
+    }
 }
