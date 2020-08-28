@@ -53,4 +53,35 @@ class ArticleController extends Controller {
             return Response::json(['error'=>'Article not found!']);
         }
     }
+
+    // update article using id
+    public function update(Request $request){
+        $validators=Validator::make($request->all(),[
+            'title'=>'required',
+            'category'=>'required',
+            'body'=>'required'
+        ]);
+        if($validators->fails()){
+            return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
+        }else{
+            $article=Article::where('id',$request->id)->first();
+            if($article){
+                $article->title=$request->title;
+                $article->author_id=$request->author;
+                $article->category_id=$request->category;
+                $article->body=$request->body;
+                if($request->file('image')==NULL){
+                    $article->image='placeholder.png';
+                }else{
+                    $filename=Str::random(20) . '.' . $request->file('image')->getClientOriginalExtension();
+                    $article->image=$filename;
+                    $request->image->move(public_path('images'),$filename);
+                }
+                $article->save();
+                return Response::json(['success'=>'Article updated successfully !']);
+            }else{
+                return Response::json(['error'=>'Article not found !']);
+            }            
+        }
+    }
 }
