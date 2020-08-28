@@ -33,4 +33,13 @@ class CommentController extends Controller {
             return Response::json(['success'=>'Comment created successfully !']);
         }
     }
+
+    // show a specific comment
+    public function show($id){
+        if(Comment::where('id',$id)->first()){
+            return new CommentResource(Comment::findOrFail($id));
+        }else{
+            return Response::json(['error'=>'Comment not found!']);
+        }        
+    }
 }
