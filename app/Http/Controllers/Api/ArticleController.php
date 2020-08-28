@@ -10,10 +10,38 @@ use App\Http\Resources\ArticleResource;
 use Illuminate\Validation\Rule;
 use App\Models\Article;
 use Auth;
+use Illuminate\Support\Str;
 
 class ArticleController extends Controller {
     // show all the article
     public function index(){
         return ArticleResource::collection(Article::orderBy('id','DESC')->paginate(10));
+    }
+
+    // store new article into the database
+    public function store(Request $request){
+        $validators=Validator::make($request->all(),[
+            'title'=>'required',
+            'category'=>'required',
+            'body'=>'required'
+        ]);
+        if($validators->fails()){
+            return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
+        }else{
+            $article=new Article();
+            $article->title=$request->title;
+            $article->author_id=$request->author;
+            $article->category_id=$request->category;
+            $article->body=$request->body;
+            if($request->file('image')==NULL){
+                $article->image='placeholder.png';
+            }else{
+                $filename=Str::random(20) . '.' . $request->file('image')->getClientOriginalExtension();
+                $article->image=$filename;
+                $request->image->move(public_path('images'),$filename);
+            }
+            $article->save();
+            return Response::json(['success'=>'Article created successfully !']);
+        }
     }
 }
