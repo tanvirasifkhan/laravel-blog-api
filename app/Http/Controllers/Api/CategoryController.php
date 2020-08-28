@@ -73,4 +73,14 @@ class CategoryController extends Controller {
             return Response::json(['error'=>'Category belongs to an article.So you cann\'t delete this category!']);
         }        
     }
+
+    // search category by keyword
+    public function searchCategory(Request $request){
+        $categories=Category::where('title','LIKE','%'.$request->keyword.'%')->orWhere('slug','LIKE','%'.$request->keyword.'%')->get();
+        if(count($categories)==0){
+            return Response::json(['message'=>'No category match found !']);
+        }else{
+            return Response::json($categories);
+        }
+    }
 }
