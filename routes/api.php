@@ -30,6 +30,7 @@ Route::get('article/{id}/show','ArticleController@show');
 Route::post('article/{id}/update','ArticleController@update');
 Route::post('article/{id}/remove','ArticleController@remove');
 Route::get('article/{keyword}/search','ArticleController@searchArticle');
+Route::get('article/{id}/comments','ArticleController@comments');
 /**********************************   Article Route Ends Here   *******************************************/
 
 /**********************************   Comment Route Starts Here   *******************************************/
