@@ -16,4 +16,24 @@ class AuthorController extends Controller {
     public function index(){
         return AuthorResource::collection(User::orderBy('id','DESC')->paginate(10));
     }
+
+    // register user
+    public function register(Request $request){
+        $validators=Validator::make($request->all(),[
+            'name'=>'required',
+            'email'=>'required|email|unique:users',
+            'password'=>'required'
+        ]);
+        if($validators->fails()){
+            return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
+        }else{
+            $author=new User();
+            $author->name=$request->name;
+            $author->email=$request->email;
+            $author->password=bcrypt($request->password);
+            $author->api_token=Str::random(80);
+            $author->save();
+            return Response::json(['success'=>'Registration done successfully !','author'=>$author,'token'=>$author->api_token]);
+        }
+    }
 }
