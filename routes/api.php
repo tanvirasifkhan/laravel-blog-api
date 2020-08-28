@@ -31,3 +31,7 @@ Route::post('article/{id}/update','ArticleController@update');
 Route::post('article/{id}/remove','ArticleController@remove');
 Route::get('article/{keyword}/search','ArticleController@searchArticle');
 /**********************************   Article Route Ends Here   *******************************************/
+
+/**********************************   Comment Route Starts Here   *******************************************/
+Route::get('comments','CommentController@index');
+/**********************************   Comment Route Ends Here   *******************************************/
