@@ -45,4 +45,5 @@ Route::post('comment/{id}/remove','CommentController@remove');
 Route::get('authors','AuthorController@index');
 Route::post('register','AuthorController@register');
 Route::post('login','AuthorController@login');
+Route::post('logout','AuthorController@logout');
 /**********************************   Author Route Ends Here   *******************************************/
