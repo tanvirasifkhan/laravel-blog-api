@@ -15,4 +15,22 @@ class CommentController extends Controller {
     public function index(){
         return CommentResource::collection(Comment::orderBy('id','DESC')->paginate(10));
     }
+
+    // store new comment into the database
+    public function store(Request $request){
+        $validators=Validator::make($request->all(),[
+            'comment'=>'required',
+            'article'=>'required'
+        ]);
+        if($validators->fails()){
+            return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
+        }else{
+            $comment=new Comment();
+            $comment->comment=$request->comment;
+            $comment->author_id=$request->author;
+            $comment->article_id=$request->article;
+            $comment->save();
+            return Response::json(['success'=>'Comment created successfully !']);
+        }
+    }
 }
