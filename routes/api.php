@@ -37,4 +37,5 @@ Route::get('comments','CommentController@index');
 Route::post('comment/store','CommentController@store');
 Route::get('comment/{id}/show','CommentController@show');
 Route::post('comment/{id}/update','CommentController@update');
+Route::post('comment/{id}/remove','CommentController@remove');
 /**********************************   Comment Route Ends Here   *******************************************/
