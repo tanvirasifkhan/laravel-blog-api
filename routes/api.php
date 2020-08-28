@@ -17,4 +17,5 @@ use Illuminate\Support\Facades\Route;
 /**********************************   Category Route Starts Here   *******************************************/
 Route::get('categories','CategoryController@index');
 Route::post('category/store','CategoryController@store');
+Route::get('category/{id}/show','CategoryController@show');
 /**********************************   Category Route Ends Here   *******************************************/
