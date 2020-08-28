@@ -32,4 +32,13 @@ class CategoryController extends Controller {
             return Response::json(['success'=>'Category created successfully !']);
         }
     }
+
+    // show a specific category by id
+    public function show($id){        
+        if(Category::where('id',$id)->first()){
+            return new CategoryResource(Category::findOrFail($id));
+        }else{
+            return Response::json(['error'=>'Category not found!']);
+        }
+    }
 }
