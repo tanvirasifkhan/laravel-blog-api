@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+/**********************************   Category Route Starts Here   *******************************************/
+Route::get('categories','CategoryController@index');
+/**********************************   Category Route Ends Here   *******************************************/
