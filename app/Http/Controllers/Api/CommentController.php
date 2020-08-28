@@ -64,4 +64,19 @@ class CommentController extends Controller {
             }            
         }
     }
+
+    // remove article
+    public function remove(Request $request){
+        try{
+            $comment=Comment::where('id',$request->id)->first();
+            if($comment){
+                $comment->delete();
+                return Response::json(['success'=>'Comment removed successfully !']);
+            }else{
+                return Response::json(['error'=>'Comment not found!']);
+            }
+        }catch(\Illuminate\Database\QueryException $exception){
+            return Response::json(['error'=>'Comment belongs to author/article.So you cann\'t delete this comment!']);
+        }        
+    }
 }
