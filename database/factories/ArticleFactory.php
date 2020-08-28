@@ -13,6 +13,6 @@ $factory->define(Article::class, function (Faker $faker) {
         'body'=>$faker->paragraph,
         'author_id'=>User::all(['id'])->random(),
         'category_id'=>Category::all(['id'])->random(),
-        'image'=>$faker->image(public_path('images'))
+        'image'=>$faker->image(public_path().'/images/', 200, 200, null, false)
     ];
 });
