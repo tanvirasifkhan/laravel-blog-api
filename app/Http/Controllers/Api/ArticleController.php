@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use Validator;
 use Response;
 use App\Http\Resources\ArticleResource;
+use App\Http\Resources\CommentResource;
 use Illuminate\Validation\Rule;
 use App\Models\Article;
+use App\Models\Comment;
 use Auth;
 use Illuminate\Support\Str;
 
@@ -108,5 +110,14 @@ class ArticleController extends Controller {
         }else{
             return Response::json($articles);
         }        
+    }
+
+    // fetch comments for a specific article
+    public function comments($id){
+        if(Article::where('id',$id)->first()){
+            return CommentResource::collection(Comment::where('article_id',$id)->get());
+        }else{
+            return Response::json(['error'=>'Article not found!']);
+        }
     }
 }
