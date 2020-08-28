@@ -58,4 +58,19 @@ class CategoryController extends Controller {
             return Response::json(['success'=>'Category updated successfully !']);
         }
     }
+
+    // remove category using id
+    public function remove(Request $request){
+        try{
+            $category=Category::where('id',$request->id)->first();
+            if($category){
+                $category->delete();
+                return Response::json(['success'=>'Category removed successfully !']);
+            }else{
+                return Response::json(['error'=>'Category not found!']);
+            }
+        }catch(\Illuminate\Database\QueryException $exception){
+            return Response::json(['error'=>'Category belongs to an article.So you cann\'t delete this category!']);
+        }        
+    }
 }
