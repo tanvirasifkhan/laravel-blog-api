@@ -25,4 +25,5 @@ Route::get('category/{keyword}/search','CategoryController@searchCategory');
 
 /**********************************   Article Route Starts Here   *******************************************/
 Route::get('articles','ArticleController@index');
+Route::post('article/store','ArticleController@store');
 /**********************************   Article Route Ends Here   *******************************************/
