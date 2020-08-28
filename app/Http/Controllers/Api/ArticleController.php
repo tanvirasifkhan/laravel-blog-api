@@ -99,4 +99,14 @@ class ArticleController extends Controller {
             return Response::json(['error'=>'Article belongs to comment.So you cann\'t delete this article!']);
         }        
     }
+
+    // search article by keyword
+    public function searchArticle(Request $request){
+        $articles=Article::where('title','LIKE','%'.$request->keyword.'%')->get();
+        if(count($articles)==0){
+            return Response::json(['message'=>'No article match found !']);
+        }else{
+            return Response::json($articles);
+        }        
+    }
 }
