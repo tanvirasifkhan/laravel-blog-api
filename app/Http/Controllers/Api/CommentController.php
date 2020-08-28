@@ -27,7 +27,7 @@ class CommentController extends Controller {
         }else{
             $comment=new Comment();
             $comment->comment=$request->comment;
-            $comment->author_id=$request->author;
+            $comment->author_id=Auth::user()->id;
             $comment->article_id=$request->article;
             $comment->save();
             return Response::json(['success'=>'Comment created successfully !']);
@@ -52,10 +52,10 @@ class CommentController extends Controller {
         if($validators->fails()){
             return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
         }else{
-            $comment=Comment::where('id',$request->id)->first();
+            $comment=Comment::where('id',$request->id)->where('author_id',Auth::user()->id)->first();
             if($comment){
                 $comment->comment=$request->comment;
-                $comment->author_id=$request->author;
+                $comment->author_id=Auth::user()->id;
                 $comment->article_id=$request->article;
                 $comment->save();
                 return Response::json(['success'=>'Comment updated successfully !']);
@@ -68,7 +68,7 @@ class CommentController extends Controller {
     // remove article
     public function remove(Request $request){
         try{
-            $comment=Comment::where('id',$request->id)->first();
+            $comment=Comment::where('id',$request->id)->where('author_id',Auth::user()->id)->first();
             if($comment){
                 $comment->delete();
                 return Response::json(['success'=>'Comment removed successfully !']);

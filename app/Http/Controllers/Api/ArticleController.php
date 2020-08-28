@@ -32,7 +32,7 @@ class ArticleController extends Controller {
         }else{
             $article=new Article();
             $article->title=$request->title;
-            $article->author_id=$request->author;
+            $article->author_id=Auth::user()->id;
             $article->category_id=$request->category;
             $article->body=$request->body;
             if($request->file('image')==NULL){
@@ -66,10 +66,10 @@ class ArticleController extends Controller {
         if($validators->fails()){
             return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
         }else{
-            $article=Article::where('id',$request->id)->first();
+            $article=Article::where('id',$request->id)->where('author_id',Auth::user()->id)->first();
             if($article){
                 $article->title=$request->title;
-                $article->author_id=$request->author;
+                $article->author_id=Auth::user()->id;
                 $article->category_id=$request->category;
                 $article->body=$request->body;
                 if($request->file('image')==NULL){
@@ -90,7 +90,7 @@ class ArticleController extends Controller {
     // remove article using id
     public function remove(Request $request){
         try{
-            $article=Article::where('id',$request->id)->first();
+            $article=Article::where('id',$request->id)->where('author_id',Auth::user()->id)->first();
             if($article){
                 $article->delete();
                 return Response::json(['success'=>'Article removed successfully !']);
