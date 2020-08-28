@@ -41,4 +41,21 @@ class CategoryController extends Controller {
             return Response::json(['error'=>'Category not found!']);
         }
     }
+
+    // update category using id
+    public function update(Request $request){
+        $validators=Validator::make($request->all(),[
+            'title'=>['required',Rule::unique('categories')->ignore($request->id)],
+            'slug'=>['required',Rule::unique('categories')->ignore($request->id)]
+        ]);
+        if($validators->fails()){
+            return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
+        }else{
+            $category=Category::findOrFail($request->id);
+            $category->title=$request->title;
+            $category->slug=strtolower(implode('-',explode(' ',$request->slug)));
+            $category->save();
+            return Response::json(['success'=>'Category updated successfully !']);
+        }
+    }
 }
