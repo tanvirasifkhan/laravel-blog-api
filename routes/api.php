@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 /**********************************   Category Route Starts Here   *******************************************/
-Route::get('categories','CategoryController@index');
+Route::get('categories','CategoryController@index')->middleware('auth:api');
 Route::post('category/store','CategoryController@store')->middleware('auth:api');
 Route::get('category/{id}/show','CategoryController@show');
 Route::post('category/{id}/update','CategoryController@update')->middleware('auth:api');
@@ -24,7 +24,7 @@ Route::get('category/{keyword}/search','CategoryController@searchCategory');
 /**********************************   Category Route Ends Here   *******************************************/
 
 /**********************************   Article Route Starts Here   *******************************************/
-Route::get('articles','ArticleController@index');
+Route::get('articles','ArticleController@index')->middleware('auth:api');
 Route::post('article/store','ArticleController@store')->middleware('auth:api');
 Route::get('article/{id}/show','ArticleController@show');
 Route::post('article/{id}/update','ArticleController@update')->middleware('auth:api');
@@ -34,7 +34,7 @@ Route::get('article/{id}/comments','ArticleController@comments');
 /**********************************   Article Route Ends Here   *******************************************/
 
 /**********************************   Comment Route Starts Here   *******************************************/
-Route::get('comments','CommentController@index');
+Route::get('comments','CommentController@index')->middleware('auth:api');
 Route::post('comment/store','CommentController@store')->middleware('auth:api');
 Route::get('comment/{id}/show','CommentController@show');
 Route::post('comment/{id}/update','CommentController@update')->middleware('auth:api');
