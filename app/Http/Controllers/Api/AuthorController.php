@@ -17,6 +17,14 @@ class AuthorController extends Controller {
         return AuthorResource::collection(User::orderBy('id','DESC')->paginate(10));
     }
 
+    // check name validation
+    public function checkName(Request $request){
+        $validators=Validator::make($request->all(),[
+            'name'=>'required'
+        ]);
+        return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
+    }
+
     // register user
     public function register(Request $request){
         $validators=Validator::make($request->all(),[
