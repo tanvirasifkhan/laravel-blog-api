@@ -81,6 +81,14 @@ class AuthorController extends Controller {
         }
     }
 
+    // get authenticated author
+    public function getAuthor(){
+        $author = [];
+        $author['name'] = Auth::user()->name;
+        $author['email'] = Auth::user()->email;
+        return Response::json($author);
+    }
+
     // log the author out
     public function logout(Request $request){
         $author=$request->user();
