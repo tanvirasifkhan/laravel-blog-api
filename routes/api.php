@@ -45,6 +45,7 @@ Route::post('comment/{id}/remove','CommentController@remove')->middleware('auth:
 Route::get('authors','AuthorController@index')->middleware('auth:api');
 Route::post('author/check/name','AuthorController@checkName');
 Route::post('author/check/email','AuthorController@checkEmail');
+Route::post('author/check/password','AuthorController@checkPassword');
 Route::post('register','AuthorController@register');
 Route::post('login','AuthorController@login');
 Route::post('logout','AuthorController@logout')->middleware('auth:api');
