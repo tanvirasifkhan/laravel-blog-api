@@ -33,6 +33,14 @@ class AuthorController extends Controller {
         return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
     }
 
+    // check password validation
+    public function checkPassword(Request $request){
+        $validators=Validator::make($request->all(),[
+            'password'=>'required'
+        ]);
+        return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
+    }
+
     // register user
     public function register(Request $request){
         $validators=Validator::make($request->all(),[
