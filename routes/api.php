@@ -48,5 +48,6 @@ Route::post('author/check/email','AuthorController@checkEmail');
 Route::post('author/check/password','AuthorController@checkPassword');
 Route::post('register','AuthorController@register');
 Route::post('login','AuthorController@login');
+Route::get('author/detail','AuthorController@getAuthor')->middleware('auth:api');
 Route::post('logout','AuthorController@logout')->middleware('auth:api');
 /**********************************   Author Route Ends Here   *******************************************/
