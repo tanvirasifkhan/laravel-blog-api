@@ -25,6 +25,14 @@ class AuthorController extends Controller {
         return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
     }
 
+    // check email validation
+    public function checkEmail(Request $request){
+        $validators=Validator::make($request->all(),[
+            'email'=>'required|email|unique:users'
+        ]);
+        return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
+    }
+
     // register user
     public function register(Request $request){
         $validators=Validator::make($request->all(),[
