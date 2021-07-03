@@ -21,6 +21,7 @@ Route::post('category/check/slug','CategoryController@checkSlug')->middleware('a
 Route::post('category/store','CategoryController@store')->middleware('auth:api');
 Route::get('category/{id}/show','CategoryController@show');
 Route::post('category/edit/check/title','CategoryController@checkEditTitle')->middleware('auth:api');
+Route::post('category/edit/check/slug','CategoryController@checkEditSlug')->middleware('auth:api');
 Route::post('category/{id}/update','CategoryController@update')->middleware('auth:api');
 Route::post('category/{id}/remove','CategoryController@remove')->middleware('auth:api');
 Route::get('category/{keyword}/search','CategoryController@searchCategory');
