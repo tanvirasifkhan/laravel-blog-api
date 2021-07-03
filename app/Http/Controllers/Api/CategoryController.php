@@ -58,6 +58,14 @@ class CategoryController extends Controller {
         }
     }
 
+    // check edit title validation
+    public function checkEditTitle(Request $request){
+        $validators = Validator::make($request->all(),[
+            'title'=>['required',Rule::unique('categories')->ignore($request->id)]
+        ]);
+        return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
+    }
+
     // update category using id
     public function update(Request $request){
         $validators=Validator::make($request->all(),[
