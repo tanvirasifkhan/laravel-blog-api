@@ -19,7 +19,15 @@ class CategoryController extends Controller {
     // check title validation
     public function checkTitle(Request $request){
         $validators = Validator::make($request->all(),[
-            'title'=>'required'
+            'title'=>'required|unique:categories',
+        ]);
+        return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
+    }
+
+    // check slug validation
+    public function checkSlug(Request $request){
+        $validators = Validator::make($request->all(),[
+            'slug'=>'required|unique:categories'
         ]);
         return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
     }
