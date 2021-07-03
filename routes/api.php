@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 /**********************************   Category Route Starts Here   *******************************************/
 Route::get('categories','CategoryController@index')->middleware('auth:api');
+Route::post('category/check/title','CategoryController@checkTitle')->middleware('auth:api');
 Route::post('category/store','CategoryController@store')->middleware('auth:api');
 Route::get('category/{id}/show','CategoryController@show');
 Route::post('category/{id}/update','CategoryController@update')->middleware('auth:api');
