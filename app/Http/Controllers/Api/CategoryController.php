@@ -16,6 +16,14 @@ class CategoryController extends Controller {
         return CategoryResource::collection(Category::orderBy('id','DESC')->paginate(10));
     }
 
+    // check title validation
+    public function checkTitle(Request $request){
+        $validators = Validator::make($request->all(),[
+            'title'=>'required'
+        ]);
+        return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
+    }
+
     // store new category into the database
     public function store(Request $request){
         $validators=Validator::make($request->all(),[
