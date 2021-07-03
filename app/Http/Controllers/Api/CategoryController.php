@@ -66,6 +66,14 @@ class CategoryController extends Controller {
         return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
     }
 
+    // check edit slug validation
+    public function checkEditSlug(Request $request){
+        $validators = Validator::make($request->all(),[
+            'slug'=>['required',Rule::unique('categories')->ignore($request->id)]
+        ]);
+        return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
+    }
+
     // update category using id
     public function update(Request $request){
         $validators=Validator::make($request->all(),[
