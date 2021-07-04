@@ -13,7 +13,7 @@ use Auth;
 class CommentController extends Controller {
     // show comments
     public function index(){
-        return CommentResource::collection(Comment::orderBy('id','DESC')->paginate(10));
+        return CommentResource::collection(Comment::where('author_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10));
     }
 
     // store new comment into the database
