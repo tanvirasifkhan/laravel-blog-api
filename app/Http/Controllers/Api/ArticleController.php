@@ -28,6 +28,14 @@ class ArticleController extends Controller {
         return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
     }
 
+    // check category validation
+    public function checkCategory(Request $request){
+        $validators = Validator::make($request->all(),[
+            'category'=>'required'
+        ]);
+        return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
+    }
+
     // store new article into the database
     public function store(Request $request){
         $validators=Validator::make($request->all(),[
