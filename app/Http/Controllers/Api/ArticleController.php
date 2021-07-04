@@ -20,6 +20,14 @@ class ArticleController extends Controller {
         return ArticleResource::collection(Article::orderBy('id','DESC')->paginate(10));
     }
 
+    // check title validation
+    public function checkTitle(Request $request){
+        $validators = Validator::make($request->all(),[
+            'title'=>'required'
+        ]);
+        return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
+    }
+
     // store new article into the database
     public function store(Request $request){
         $validators=Validator::make($request->all(),[
