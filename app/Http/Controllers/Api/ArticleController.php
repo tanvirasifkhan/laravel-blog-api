@@ -17,7 +17,7 @@ use Illuminate\Support\Str;
 class ArticleController extends Controller {
     // show all the article
     public function index(){
-        return ArticleResource::collection(Article::orderBy('id','DESC')->paginate(10));
+        return ArticleResource::collection(Article::where('author_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10));
     }
 
     // check title validation
