@@ -18,7 +18,7 @@ class ArticleResource extends JsonResource
             'id'=>$this->id,
             'image'=>asset('images/'.$this->image),
             'title'=>$this->title,
-            'description'=>$this->body,
+            'body'=>$this->body,
             'category_title'=>$this->category->title,
             'category'=>$this->category_id,
             'author'=>$this->author->name
