@@ -36,6 +36,14 @@ class ArticleController extends Controller {
         return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
     }
 
+    // check body validation
+    public function checkBody(Request $request){
+        $validators = Validator::make($request->all(),[
+            'body'=>'required'
+        ]);
+        return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
+    }
+
     // store new article into the database
     public function store(Request $request){
         $validators=Validator::make($request->all(),[
