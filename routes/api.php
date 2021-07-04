@@ -31,6 +31,7 @@ Route::get('category/{keyword}/search','CategoryController@searchCategory');
 Route::get('articles','ArticleController@index')->middleware('auth:api');
 Route::post('article/check/title','ArticleController@checkTitle')->middleware('auth:api');
 Route::post('article/check/category','ArticleController@checkCategory')->middleware('auth:api');
+Route::post('article/check/body','ArticleController@checkBody')->middleware('auth:api');
 Route::post('article/store','ArticleController@store')->middleware('auth:api');
 Route::get('article/{id}/show','ArticleController@show');
 Route::post('article/{id}/update','ArticleController@update')->middleware('auth:api');
