@@ -24,6 +24,14 @@ class CommentController extends Controller {
         return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
     }
 
+    // check article validation
+    public function checkArticle(Request $request){
+        $validators = Validator::make($request->all(),[
+            'article'=>'required'
+        ]);
+        return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
+    }
+
     // store new comment into the database
     public function store(Request $request){
         $validators=Validator::make($request->all(),[
