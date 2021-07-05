@@ -16,6 +16,14 @@ class CommentController extends Controller {
         return CommentResource::collection(Comment::where('author_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10));
     }
 
+    // check comment validation
+    public function checkComment(Request $request){
+        $validators = Validator::make($request->all(),[
+            'comment'=>'required'
+        ]);
+        return Response::json(['errors'=>$validators->getMessageBag()->toArray()]);
+    }
+
     // store new comment into the database
     public function store(Request $request){
         $validators=Validator::make($request->all(),[
