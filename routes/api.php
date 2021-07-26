@@ -22,8 +22,8 @@ Route::post('category/store','CategoryController@store')->middleware('auth:api')
 Route::get('category/{id}/show','CategoryController@show');
 Route::post('category/edit/check/title','CategoryController@checkEditTitle')->middleware('auth:api');
 Route::post('category/edit/check/slug','CategoryController@checkEditSlug')->middleware('auth:api');
-Route::post('category/{id}/update','CategoryController@update')->middleware('auth:api');
-Route::post('category/{id}/remove','CategoryController@remove')->middleware('auth:api');
+Route::post('category/update','CategoryController@update')->middleware('auth:api');
+Route::post('category/remove','CategoryController@remove')->middleware('auth:api');
 Route::get('category/{keyword}/search','CategoryController@searchCategory');
 /**********************************   Category Route Ends Here   *******************************************/
 
@@ -34,8 +34,8 @@ Route::post('article/check/category','ArticleController@checkCategory')->middlew
 Route::post('article/check/body','ArticleController@checkBody')->middleware('auth:api');
 Route::post('article/store','ArticleController@store')->middleware('auth:api');
 Route::get('article/{id}/show','ArticleController@show');
-Route::post('article/{id}/update','ArticleController@update')->middleware('auth:api');
-Route::post('article/{id}/remove','ArticleController@remove')->middleware('auth:api');
+Route::post('article/update','ArticleController@update')->middleware('auth:api');
+Route::post('article/remove','ArticleController@remove')->middleware('auth:api');
 Route::get('article/{keyword}/search','ArticleController@searchArticle');
 Route::get('article/{id}/comments','ArticleController@comments');
 /**********************************   Article Route Ends Here   *******************************************/
